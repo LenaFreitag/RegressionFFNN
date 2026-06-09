@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Regression mit TensorFlow.js</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1>Regression mit Feed-Forward Neural Network</h1>
+    </header>
+
+    <section class="result-section">
+      <h2>R1: Datensätze</h2>
+
+      <div class="plot-grid">
+        <article class="plot-card">
+          <h3>Ohne Rauschen</h3>
+          <div id="plot-clean-data" class="plot"></div>
+        </article>
+
+        <article class="plot-card">
+          <h3>Mit Rauschen</h3>
+          <div id="plot-noisy-data" class="plot"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="result-section">
+      <h2>R2: Modell ohne Rauschen</h2>
+
+      <div class="plot-grid">
+        <article class="plot-card">
+          <h3>Trainingsdaten</h3>
+          <div id="plot-clean-train-prediction" class="plot"></div>
+          <p id="mse-clean-train" class="mse"></p>
+        </article>
+
+        <article class="plot-card">
+          <h3>Testdaten</h3>
+          <div id="plot-clean-test-prediction" class="plot"></div>
+          <p id="mse-clean-test" class="mse"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="result-section">
+      <h2>R3: Best-Fit-Modell mit Rauschen</h2>
+
+      <div class="plot-grid">
+        <article class="plot-card">
+          <h3>Trainingsdaten</h3>
+          <div id="plot-bestfit-train-prediction" class="plot"></div>
+          <p id="mse-bestfit-train" class="mse"></p>
+        </article>
+
+        <article class="plot-card">
+          <h3>Testdaten</h3>
+          <div id="plot-bestfit-test-prediction" class="plot"></div>
+          <p id="mse-bestfit-test" class="mse"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="result-section">
+      <h2>R4: Overfit-Modell mit Rauschen</h2>
+
+      <div class="plot-grid">
+        <article class="plot-card">
+          <h3>Trainingsdaten</h3>
+          <div id="plot-overfit-train-prediction" class="plot"></div>
+          <p id="mse-overfit-train" class="mse"></p>
+        </article>
+
+        <article class="plot-card">
+          <h3>Testdaten</h3>
+          <div id="plot-overfit-test-prediction" class="plot"></div>
+          <p id="mse-overfit-test" class="mse"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="text-section">
+      <h2>Diskussion</h2>
+
+      <p>
+        Das Modell ohne Rauschen konnte die Funktion gut lernen, weil alle Datenpunkte exakt auf der ursprünglichen Funktion liegen.
+        Deshalb sind der Trainingsfehler und der Testfehler beide relativ klein.
+        Für dieses Modell wurden 500 Epochen verwendet, was ausgereicht hat, um die Grundform der Funktion gut darzustellen. <br>
+        Beim verrauschten Datensatz ist die Aufgabe schwieriger, weil die y-Werte künstlich verändert wurden und das Modell zwischen echter Funktionsform und zufälligem Rauschen unterscheiden muss.
+        Das Best-Fit-Modell wurde mit der Standardarchitektur und 1000 Epochen trainiert, weil der Trainingsverlauf stabil war und die gelernte Kurve die Grundform der Funktion gut getroffen hat. <br>
+        Das Overfit-Modell wurde mit einer größeren Architektur und 3000 Epochen trainiert, um den Effekt von Overfitting deutlicher sichtbar zu machen.
+        Dabei war zu beobachten, dass längeres Training nicht automatisch zu einem besseren Modell führt.
+        Der Testfehler des Overfit-Modells ist höher als beim Best-Fit-Modell, obwohl beide Modelle auf denselben verrauschten Trainingsdaten gelernt haben.
+        Daraus folgt, dass nicht nur der Trainingsfehler betrachtet werden darf, sondern vor allem die Leistung auf unbekannten Testdaten wichtig ist.
+      </p>
+    </section>
+    
+    <section class="text-section">
+    <h2>Dokumentation</h2>
+  
+    <h3>Technisch</h3>
+  
+    <p>
+      Die Anwendung wurde als HTML-, CSS- und JavaScript-Webseite umgesetzt.
+      Für das neuronale Netz wird TensorFlow.js verwendet.
+      Die Diagramme werden mit Plotly.js dargestellt.
+      Die Daten und die vortrainierten Modelle werden beim Laden der Seite aus lokalen Projektdateien geladen, damit die Seite schnell startet und nicht jedes Mal neu trainieren muss.
+    </p>
+  
+    <ul>
+      <li>
+        <strong>TensorFlow.js:</strong>
+        Wird verwendet, um die Modelle zu laden, Vorhersagen zu berechnen und den Mean-Squared-Error zu bestimmen.
+      </li>
+      <li>
+        <strong>Plotly.js:</strong>
+        Wird verwendet, um Datenpunkte und Modellvorhersagen als Diagramme darzustellen.
+      </li>
+      <li>
+        <strong>JavaScript:</strong>
+        Steuert das Laden der Daten, das Laden der Modelle, die Berechnung der Fehlerwerte und den Aufbau der Visualisierung.
+      </li>
+      <li>
+        <strong>CSS:</strong>
+        Wird für das zweispaltige Layout, Farben und die Gestaltung der Ergebnisbereiche verwendet.
+      </li>
+    </ul>
+  
+    <h3>Fachlich</h3>
+  
+    <p>
+      Es wurden 100 zufällige x-Werte gleichverteilt im Intervall von -2 bis 2 erzeugt.
+      Für diese Werte wurden die passenden y-Werte mit der gegebenen Funktion berechnet.
+      Anschließend wurden die Daten zufällig in 50 Trainingsdaten und 50 Testdaten aufgeteilt.
+      Zusätzlich wurde ein zweiter Datensatz erstellt, bei dem nur die y-Werte mit normalverteiltem Rauschen der Varianz 0.05 verändert wurden.
+      Die x-Werte bleiben dabei unverändert.
+    </p>
+  
+    <p>
+      Für die Regression wurde ein Feed-Forward Neural Network verwendet.
+      Das Standardmodell besteht aus zwei Hidden Layern mit jeweils 100 Neuronen und ReLU-Aktivierung.
+      Der Output-Layer hat ein Neuron ohne Aktivierungsfunktion, damit beliebige reelle y-Werte vorhergesagt werden können.
+      Als Loss wurde der Mean-Squared-Error verwendet.
+      Trainiert wurde mit dem Adam-Optimizer, einer Lernrate von 0.01 und einer Batch-Size von 32.
+    </p>
+  
+    <h3>Parameter und Ergebnisse</h3>
+  
+    <ul>
+      <li>
+        <strong>Modell ohne Rauschen:</strong>
+        Standardarchitektur, 500 Epochen.
+        Train-MSE: 0.00230, Test-MSE: 0.01225.
+      </li>
+      <li>
+        <strong>Best-Fit-Modell:</strong>
+        Standardarchitektur, trainiert auf verrauschten Daten mit 1000 Epochen.
+        Train-MSE: 0.02344, Test-MSE: 0.06476.
+      </li>
+      <li>
+        <strong>Overfit-Modell:</strong>
+        Größere Architektur und längeres Training mit 3000 Epochen.
+        Train-MSE: 0.03020, Test-MSE: 0.11616.
+      </li>
+    </ul>
+  
+    <p>
+      Das Modell ohne Rauschen erreicht auf Trainings- und Testdaten kleine Fehlerwerte.
+      Das Best-Fit-Modell hat auf den verrauschten Testdaten den kleineren Fehler als das Overfit-Modell.
+      Das Overfit-Modell wurde länger trainiert und besitzt eine größere Architektur.
+      Sein Test-MSE ist deutlich höher als beim Best-Fit-Modell, was zeigt, dass es schlechter generalisiert.
+    </p>
+  
+    <p>
+      Die Testdaten wurden nicht zum Training verwendet.
+      Sie dienen nur dazu, nach dem Training zu prüfen, wie gut die Modelle auf unbekannten Daten funktionieren.
+      Die gespeicherten Modelle werden beim Laden der Webseite verwendet, um die Vorhersagekurven dynamisch zu berechnen und anschließend zusammen mit den Datenpunkten zu visualisieren.
+    </p>
+  </section>
+  </main>
+
+  <footer class="discreet-credit" aria-hidden="true">Diese Seite wurde von Lena Freitag für den Kurs „Deep Learning" an der BHT im Masterstudiengang Medieninformatik Online erstellt.</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+
+  <script src="data.js"></script>
+  <script src="model.js"></script>
+  <script src="plot.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

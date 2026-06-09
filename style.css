@@ -1,0 +1,201 @@
+/* ---------------------------
+   Theme variables
+   --------------------------- */
+:root {
+  --page-max-width: 1280px;
+  --gutter: 18px;
+
+  --color-bg: #ffffff;
+  --color-page: #fff6f0;
+  --color-page-border: #ffe9d8;
+  --color-card: #ffffff;
+  --color-muted: #666666;
+  --color-text: #222222;
+  --color-primary: #3678c8;
+  --color-accent: #ffe9d8;
+
+  --radius: 10px;
+  --page-border-width: 8px;
+}
+
+/* ---------------------------
+   Global layout & typography
+   --------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Baloo 2", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.page {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--color-page);
+  padding: 28px;
+  border-left: var(--page-border-width) solid var(--color-page-border);
+  border-right: var(--page-border-width) solid var(--color-page-border);
+}
+
+.page-header {
+  padding: 20px;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: 1.9rem;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+/* ---------------------------
+   Sections
+   --------------------------- */
+.result-section,
+.text-section {
+  margin-bottom: 18px;
+}
+
+.result-section > h2,
+.text-section > h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.35rem;
+}
+
+.section-description {
+  margin: 0 0 12px 0;
+  color: var(--color-muted);
+}
+
+/* ---------------------------
+   Two-column plot layout
+   --------------------------- */
+.plot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+}
+
+.plot-card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 14px;
+  border: 1px solid var(--color-page-border);
+}
+
+.plot-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.05rem;
+}
+
+.plot {
+  width: 100%;
+  min-height: 390px;
+}
+
+/* ---------------------------
+   MSE result text
+   --------------------------- */
+.mse {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  background: var(--color-accent);
+  border-radius: var(--radius);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.mse.secondary {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+/* ---------------------------
+   Text blocks
+   --------------------------- */
+.text-section {
+  background: var(--color-card);
+  border: 1px solid var(--color-page-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.text-section h3 {
+  margin: 18px 0 6px 0;
+}
+
+.text-section p {
+  margin: 0 0 10px 0;
+}
+
+.text-section ul {
+  margin-top: 6px;
+}
+
+/* ---------------------------
+   Status / loading
+   --------------------------- */
+.status {
+  margin: 0 0 18px 0;
+  padding: 12px 14px;
+  background: var(--color-card);
+  border: 1px solid var(--color-page-border);
+  border-radius: var(--radius);
+  color: var(--color-muted);
+}
+
+.discreet-credit {
+  display: block;
+  font-size: 14px;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: 50px;
+  padding: 0 8px;
+  background: transparent;
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  background: var(--color-page);
+  padding: 28px;
+  border-left: var(--page-border-width) solid var(--color-page-border);
+  border-right: var(--page-border-width) solid var(--color-page-border);
+}
+
+/* ---------------------------
+   Responsive
+   --------------------------- */
+@media (max-width: 900px) {
+  .page {
+    padding: 16px;
+  }
+
+  .plot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plot {
+    min-height: 340px;
+  }
+}

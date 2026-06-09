@@ -16,7 +16,7 @@ Die Anwendung erzeugt zufällige Datenpunkte im Intervall `[-2, 2]`. Daraus werd
 * CSS
 * JavaScript
 * TensorFlow.js
-* Chart.js / Plotly
+* Plotly.js
 
 ## Modell
 
@@ -28,13 +28,38 @@ Verwendet wird ein Feed-Forward Neural Network mit:
 * Mean Squared Error als Loss
 * Adam Optimizer
 
+**Model-Ordnerstruktur**
+
+Die vortrainierten Modelle liegen in Unterordnern unter `models/`:
+
+```
+models/
+├── clean-model/
+│   ├── clean-model.json
+│   └── clean-model.weights.bin
+├── best-fit-model/
+│   ├── bestfit-model.json
+│   └── bestfit-model.weights.bin
+└── overfit-model/
+	├── overfit-model.json
+	└── overfit-model.weights.bin
+```
+
+**Wichtige Hyperparameter (used in this project)**
+
+* Datensätze: `N = 100` (Aufteilung `50` Train / `50` Test)
+* Rauschen: Gaussian Noise, `variance = 0.05` (nur y-Labels)
+* Optimizer: `Adam` mit `learningRate = 0.01`
+* `batchSize = 32`
+* Epochs: `clean = 500`, `bestFit = 1000`, `overfit = 3000`
+
 ## Start
 
 ```bash
 npx serve .
 ```
 
-Dann die Anwendung im Browser öffnen.
+Die Anwendung im Browser öffnen. Hinweis: Die Seite lädt standardmäßig die in `models/` gespeicherten, vortrainierten Modelle und berechnet Vorhersagen und MSE beim Laden. Für eigene Experimente sind Funktionen zum Erzeugen, Trainieren und Speichern von Modellen im Quellcode enthalten.
 
 ## Ziel
 
